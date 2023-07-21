@@ -1,0 +1,150 @@
+.symbolWrapper .symbol {
+    position: relative;
+    font-size: 12px;
+}
+
+.symbolWrapper.c2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.symbolWrapper.c3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.symbolWrapper.c4 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c5 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c5 span:nth-child(3) {
+    position: absolute;
+    top: 25;
+    right: 15px;
+}
+
+.symbolWrapper.c6 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c7 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c7 span:nth-child(3) {
+    position: absolute;
+    top: 15px;
+    right: 16px;
+}
+
+.symbolWrapper.c8 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c8 span:nth-child(3) {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.symbolWrapper.c8 span:nth-child(6) {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+}
+
+.symbolWrapper.c9 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c9 span:nth-child(5) {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+}
+
+.symbolWrapper.c10 {
+    display: grid;
+    justify-content: space-between;
+    grid-template:
+        'header header'
+        'footer footer';
+    align-items: center;
+    align-content: space-between;
+}
+
+.symbolWrapper.c10 span:nth-child(5) {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.symbolWrapper.c10 span:nth-child(10) {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+}
+
+.symbolWrapper span:last-child,
+.symbolWrapper.c3 span:last-child,
+.symbolWrapper.c4 span:nth-child(3),
+.symbolWrapper.c5 span:nth-child(4),
+.symbolWrapper.c6 span:nth-child(5),
+.symbolWrapper.c7 span:nth-child(6),
+.symbolWrapper.c8 span:nth-child(6),
+.symbolWrapper.c8 span:nth-child(7),
+.symbolWrapper.c9 span:nth-child(6),
+.symbolWrapper.c9 span:nth-child(7),
+.symbolWrapper.c9 span:nth-child(8),
+.symbolWrapper.c10 span:nth-child(6),
+.symbolWrapper.c10 span:nth-child(7),
+.symbolWrapper.c10 span:nth-child(8),
+.symbolWrapper.c10 span:nth-child(9){
+    rotate: 180deg;
+}

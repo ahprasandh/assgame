@@ -1,0 +1,228 @@
+<html>
+
+<head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22  font-size=%22110%22>♠</text></svg>">
+    <title>Ass</title>
+    <!-- <script type="importmap">
+        {
+          "imports": {
+            "vue": "./vue.3.3.4.prod.js"
+          }
+        }
+      </script> -->
+    <script src="vue.3.3.4.prod.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100%;
+        }
+
+        .wrapper {
+            background: #027000;
+            height: 100%;
+            font-size: 10px;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hearts,
+        .diamonds {
+            color: red;
+        }
+
+        .played {
+            color: #4b4b4b !important;
+            background: #6b6b6b !important;
+            box-shadow: none !important;
+        }
+
+        .container {
+            align-content: center;
+            align-items: center;
+            display: flex;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .card {
+            position: relative;
+            height: 100px;
+            border-radius: 2px;
+            margin: 0 10px;
+            display: flex;
+            width: 65px;
+            cursor: pointer;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            background: #fcfcfc;
+            box-shadow: -2px 0px 4px 0px #888888;
+            border-radius: 5;
+        }
+
+        .symbol {
+            font-family: apple color emoji, segoe ui emoji, noto color emoji, android emoji, emojisymbols, emojione mozilla, twemoji mozilla, segoe ui symbol;
+            font-size: 6px;
+            top: 1px;
+            position: absolute;
+            margin-left: 1px;
+        }
+
+        .played .symbol {
+            opacity: 0.5;
+            font-family: emoji;
+        }
+
+        .selectedSuite {
+            font-size: 50px;
+            position: absolute;
+            right: 50px;
+            top: 20;
+            border: 1px solid;
+        }
+
+        .top {
+            position: absolute;
+            left: 3px;
+            top: 3px;
+        }
+
+        .bottom {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            transform: rotate(180deg);
+        }
+
+        .symbolWrapper {
+            position: absolute;
+            height: 70%;
+            width: 70%;
+        }
+
+        .imageWrapper {
+            position: relative;
+            display: flex;
+            height: 100%;
+            width: 100%;
+            align-content: stretch;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .imageWrapper img {
+            height: 100%;
+            width: 123%;
+        }
+
+        .played .imageWrapper {
+            opacity: 0.2;
+        }
+
+        .ass {
+            /* top: 1px; */
+            position: relative;
+            /* margin-left: 1px; */
+            font-size: 40px;
+        }
+    </style>
+    <link rel="stylesheet" href="cardSymbols.css" type="text/css">
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <span class="selectedSuite symbol" :class="currentSuite">{{getSuite(currentSuite)}}</span>
+        <div v-for="suites,suiteName in cards" :class="suiteName" class="container">
+            <div class="card" v-for="status,card in suites" :class="{played:status}" @click="markCard(suiteName,card)">
+                <div class="top">
+                    <span v-text="card"></span>
+                    <span class="symbol" v-text="getSuite(suiteName)"></span>
+                </div>
+                <div class="symbolWrapper" :class="'c'+card" v-if="isNum(card)">
+                    <span class="symbol" :class="card" v-for="i in parseInt(card)" v-text="getSuite(suiteName)"></span>
+                </div>
+                <div v-else class="imageWrapper" :class="suiteName">
+                    <span class="ass symbol" v-if="card==='A'" v-text="getSuite(suiteName)"></span>
+                    <img v-if="card==='K'" :src="getImgName(suiteName,'king')">
+                    <img v-if="card==='Q'" :src="getImgName(suiteName,'queen')">
+                    <img v-if="card==='J'" :src="getImgName(suiteName,'jack')">
+                </div>
+                <div class="bottom">
+                    <span v-text="card"></span>
+                    <span class="symbol" v-text="getSuite(suiteName)"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="module">
+        // import { createApp } from 'vue'
+
+        var app = {
+            mounted() {
+                document.addEventListener('keydown', this.listenKey);
+            },
+            data() {
+                return {
+                    numMap: { "2": "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8", "9": "9", "0": "10", "f": "J", "d": "Q", "s": "K", "a": "A" },
+                    currentSuite: "spade",
+                    cards: {
+                        spade: { "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false, "J": false, "Q": false, "K": false, "A": false },
+                        hearts: { "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false, "J": false, "Q": false, "K": false, "A": false },
+                        clubs: { "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false, "J": false, "Q": false, "K": false, "A": false },
+                        diamonds: { "2": false, "3": false, "4": false, "5": false, "6": false, "7": false, "8": false, "9": false, "10": false, "J": false, "Q": false, "K": false, "A": false },
+                    }
+                }
+            },
+            methods: {
+                getImgName(suiteName, card) {
+                    return card + (suiteName == 'hearts' || suiteName == 'diamonds' ? 'red' : '') + '.svg'
+                },
+                isNum(num) {
+                    return parseInt(num) > -1
+                },
+                listenKey(event) {
+                    let key = event.key;
+                    if (key == "ArrowUp") {
+                        this.currentSuite = "spade"
+                    } else if (key == "ArrowRight") {
+                        this.currentSuite = "clubs"
+                    } else if (key == "ArrowDown") {
+                        this.currentSuite = "hearts"
+                    } else if (key == "ArrowLeft") {
+                        this.currentSuite = "diamonds"
+                    } else if (this.numMap[key]) {
+                        this.handleMark(this.numMap[key])
+                        this.markCard(this.currentSuite, this.numMap[key])
+                    }
+                },
+                handleMark(card) {
+                    console.log(card, this.currentSuite)
+                },
+                getSuite(name) {
+                    if (name == "spade") {
+                        return "♠"
+                    } else if (name == "clubs") {
+                        return "♣"
+                    } else if (name == "hearts") {
+                        return "♥"
+                    } else if (name == "diamonds") {
+                        return "♦"
+                    }
+                },
+                markCard(suiteName, card) {
+                    this.cards[suiteName][card] = !this.cards[suiteName][card];
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app')
+    </script>
+</body>
+
+</html>
